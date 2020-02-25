@@ -1,0 +1,227 @@
+﻿@model _RestoranWeb.Models.BigViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/mystyle.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Slider/engine1/style.css" />
+    <script type="text/javascript" src="~/Slider/engine1/jquery.js"></script>
+</head>
+<body onload="startTime()">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("AKAY", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Üye Ol", "Membership", "Account")</li>
+
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Restoran Ekle", "AddRest", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Restoran Listele", "ListRest", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Sipariş Geçmişim", "SelectProduct", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+                    }
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+
+                        using (Html.BeginForm("Login", "Account"))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <li style="margin-top:12px;">
+                                @Html.TextBoxFor(m => m.LoginModel.Username, new { @placeholder = "KullanıcıAdınız", @class = "align", @style = "width:150px;height:25px;font-family:Arial;border-radius:2px;border:1px;" })
+
+                                @Html.PasswordFor(m => m.LoginModel.Password, new { @placeholder = "Şifreniz", @style = "width:150px;height:25px;border-radius:2px;border:0px;font-family:Arial;" })
+
+                                <input type="submit" value="Giriş Yap" style="height:26px;line-height:13px;" class=" btn btn-primary">
+
+                                @* <input type="button" value="Üye değilmisiniz?" style="height:26px;line-height:13px;" class="btn btn-primary " onclick="window.location='../Account/Register';" />*@
+                            </li>
+
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Hoşgeldin " + User.Identity.Name + "!", "Index", "Home", null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Çıkış Yap", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+
+                    }
+
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="container">
+
+        <div id="slider">
+
+            <div id="wowslider-container1">
+                <div class="ws_images">
+                    <ul>
+                        <li><img src="~/Slider/data1/images/img1.jpg" alt="css image gallery" title="img1" id="wows1_0" /></li>
+                        <li><img src="~/Slider/data1/images/img2.jpg" alt="css image gallery" title="img2" id="wows1_1" /></li>
+                        <li><img src="~/Slider/data1/images/img3.jpg" alt="css image gallery" title="img3" id="wows1_2" /></li>
+                    </ul>
+                </div>
+                <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com">image slider jquery</a> by WOWSlider.com v8.0</div>
+                <div class="ws_shadow"></div>
+            </div>
+
+
+        </div>
+
+
+        <div id="textarea">
+
+            <div id="search-panel">
+                @using (Html.BeginForm("SearchRest", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div style="border:0px;height:40px;background-color:#3c3c3c;" class="form-control">
+                        @Html.DropDownList("Semtara", null, "Semtinizi Seçiniz ", new { @class = "dropdown-toggle", @style = "border-radius:3px;font-family:Tahoma;" })
+                        <input type="text" name="searchstring" autocomplete="off" style="font-family:Tahoma;border-radius:3px;" />
+                        <input type="submit" value="Ara" class="btn btn-default " style="height:26px;line-height:13px;">
+                        @Html.ValidationSummary()
+                    </div>
+                }
+
+            </div>
+
+            <div class="baslik" style="color:#333;">
+                <h4><b>  Kredi kartınız bizi hiç ilgilendirmiyor! </b> </h4>
+            </div>
+            <div class="text-a" style="font-size:14px;color:#333;">
+                <p>
+
+                    Siparişlerinizi en doğru, en hızlı ve en kolay şekilde alıyor, ilgili restorana eksiksiz ve anında iletiyoruz.
+                    Kredi kartı, güvenlik sorunu yok. Siparişinizi <b>hiçbir ekstra ücret ödemeden </b> verin, <b> 10-45 dakika </b> (restoranın ortalama gönderim süresi)
+                    içerisinde yemeğiniz elinizde olsun.
+
+
+
+                </p>
+            </div>
+            <div class="text-b" style="font-size:14px;color:#222">
+
+                <img src="~/Images/anonyColumnFirst.png" width="100" />
+                <p> <b>  RESTORANI SEÇ </b> </p>
+
+            </div>
+            <div class="text-c" style="font-size:14px;color:#222">
+
+                <img src="~/Images/anonyColumnSecond.png" width="100" />
+                <p> <b>  SİPARİŞİNİ VER </b> </p>
+
+            </div>
+            <div class="text-d" style="font-size:14px;color:#222">
+
+                <img src="~/Images/anonyColumnLast.png" width="100" />
+                <p> <b>  DİLEDİĞİN GİBİ ÖDE </b> </p>
+            </div>
+
+
+        </div>
+    </div>
+    <div id="menu">
+
+        <div class="menutitle">
+            <center style="padding-top:0px;font-size:22px;color:#eee;font-weight:bold;background-color:#940312;border-radius:5px;width:400px;margin-left:auto;margin-right:auto;">
+                • Bunlarında tadına bakın •
+            </center>
+        </div>
+        <div class="submenu">
+            <div class="submenutitle"> <center> Beyaz Fırın'da Kahvaltı </center> </div>
+            <div class="submenuimage"> <img style="border-radius: 5px;" src="~/Images/kahvalti1.jpg" /> </div>
+        </div>
+        <div class="submenu">
+            <div class="submenutitle"> <center> Anonim Türk Bistro'da Öğle Menüsü </center> </div>
+            <div class="submenuimage"> <img style="border-radius: 5px;" src="~/Images/öğlemenusu.jpg" /> </div>
+        </div>
+        <div class="submenu">
+            <div class="submenutitle"> <center> Boreas'da Akşam Yemeği </center> </div>
+            <div class="submenuimage"> <img style="border-radius: 5px;" src="~/Images/aksammenusu.jpg" /> </div>
+        </div>
+        <div class="submenu">
+            <div class="submenutitle"> <center> Kahveci "Bir Kahveye Bekleriz"  </center> </div>
+            <div class="submenuimage"> <img style="border-radius: 5px;" src="~/Images/kahveci.jpg" /> </div>
+        </div>
+
+    </div>
+
+    <div id="footer" class="container" style="width:100%;height:50px;">
+        <div id="social">
+            <div class="social">  <a href="http://facebook.com">  <img src="~/Images/facebook-128.png" height="32" /> </a> </div>
+            <div class="social">
+                <a href="http://twitter.com">   <img src="~/Images/twitter-128.png" height="32" />  </a>
+            </div>
+
+
+
+            <div id="saat" style="font-family:Tahoma;font-size:18px;line-height:35px;margin:0px 5px;color:#222;font-weight:bold">   </div>
+
+
+        </div>
+    </div>
+    <script>
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+
+
+            m = checkTime(m);
+            s = checkTime(s);
+
+            document.getElementById('saat').innerHTML = h + ":" + m + ":" + s;
+            var t = setTimeout(function () { startTime() }, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+    </script>
+    <script type="text/javascript" src="~/Slider/engine1/wowslider.js"></script>
+    <script type="text/javascript" src="~/Slider/engine1/script.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/myJavascript.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</body>
+</html>

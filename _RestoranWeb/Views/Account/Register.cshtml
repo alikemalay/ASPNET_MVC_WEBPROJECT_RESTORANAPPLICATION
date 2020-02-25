@@ -1,0 +1,117 @@
+﻿@model _RestoranWeb.Models.BigViewModel
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Register</title>
+        <link href="../Content/bootstrap.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("AKAY", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        
+
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+
+                            using (Html.BeginForm("Login", "Account"))
+                            {
+                                @Html.AntiForgeryToken()
+
+
+                                <li style="margin-top:10px;">
+                                    @Html.TextBoxFor(m => m.LoginModel.Username, new { @placeholder = "KullanıcıAdınız", @class = "align", @style = "width:150px;height:25px;font-family:Arial;border-radius:2px;border:1px;" })
+
+                                    @Html.PasswordFor(m => m.LoginModel.Password, new { @placeholder = "Şifreniz", @style = "width:150px;height:25px;border-radius:2px;border:0px;font-family:Arial;" })
+
+                                    <input type="submit" value="Giriş Yap" style="height:26px;line-height:13px;" class=" btn btn-primary">
+
+                                    @* <input type="button" value="Üye değilmisiniz?" style="height:26px;line-height:13px;" class="btn btn-primary " onclick="window.location='../Account/Register';" />*@
+                                </li>
+
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                @Html.ActionLink("Hoşgeldin " + User.Identity.Name + "!", "Index", "Home", null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Çıkış Yap", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                            </li>
+                        }
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div style="margin-top:75px;">
+
+
+            <center>
+                <h2>Üye Kayıt</h2>
+            </center>
+
+            @Html.ValidationSummary()
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <table style="margin-left:auto;margin-right:auto;">
+                    <tbody>
+                        <tr>
+                            <td style=" width:140px;">
+                                @Html.LabelFor(m => m.RegisterModel.Name)
+                            </td>
+                            <td><p>@Html.TextBoxFor(m => m.RegisterModel.Name)</p></td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.RegisterModel.Surname)</td>
+                            <td><p>@Html.TextBoxFor(m => m.RegisterModel.Surname)</p></td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.RegisterModel.Username)</td>
+                            <td><p>@Html.TextBoxFor(m => m.RegisterModel.Username)</p></td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.RegisterModel.Password)</td>
+                            <td><p>@Html.PasswordFor(m => m.RegisterModel.Password)</p></td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.RegisterModel.ConfirmPassword)</td>
+                            <td><p>@Html.PasswordFor(m => m.RegisterModel.ConfirmPassword)</p></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Kaydol" class="btn btn-default">
+                                <input type="button" value="Geri" class="btn btn-default" onclick="window.location='../Account/Index';" />
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ccaab8f31adb47e39dcfdeb8973be37f" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.Adres" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.AspNetRoles" Width="1.5" PointX="5.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.AspNetUserClaims" Width="1.5" PointX="10.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.AspNetUserLogins" Width="1.5" PointX="10.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.AspNetUsers" Width="1.5" PointX="8" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.Restoran" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.Semt" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.Siparis" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.SiparisDetay" Width="1.5" PointX="9.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranOtomasyonModel.Urun" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_Adres_Semt" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_Siparis_Adres" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_Siparis_Restoran" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_SiparisDetay_Siparis" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_SiparisDetay_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.RestoranSemt" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.RestoranUrun" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_Adres_AspNetUsers" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_Siparis_AspNetUsers" />
+        <AssociationConnector Association="RestoranOtomasyonModel.FK_Siparis_Urun" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

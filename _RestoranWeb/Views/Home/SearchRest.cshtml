@@ -1,0 +1,209 @@
+﻿@model _RestoranWeb.Models.BigViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="~/Style/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("AKAY", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Üye Ol", "Membership", "Account")</li>
+
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Restoran Ekle", "AddRest", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Restoran Listele", "ListRest", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Sipariş Geçmişim", "SelectProduct", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+                    }
+
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+
+                        using (Html.BeginForm("Login", "Account"))
+                        {
+                            @Html.AntiForgeryToken()
+
+
+                            <li style="margin-top:10px;">
+                                @Html.TextBoxFor(m => m.LoginModel.Username, new { @placeholder = "KullanıcıAdınız", @class = "align", @style = "width:150px;height:25px;font-family:Arial;border-radius:2px;border:1px;" })
+
+                                @Html.PasswordFor(m => m.LoginModel.Password, new { @placeholder = "Şifreniz", @style = "width:150px;height:25px;border-radius:2px;border:0px;font-family:Arial;" })
+
+                                <input type="submit" value="Giriş Yap" style="height:26px;line-height:13px;" class=" btn btn-primary">
+
+                                @* <input type="button" value="Üye değilmisiniz?" style="height:26px;line-height:13px;" class="btn btn-primary " onclick="window.location='../Account/Register';" />*@
+                            </li>
+
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Hoşgeldin " + User.Identity.Name + "!", "Index", "Home", null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Çıkış Yap", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </li>
+                    }
+
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <center>
+        <div id="search-panel" style="width:880px;margin-top:65px;">
+            @using (Html.BeginForm("SearchRest", "Home", FormMethod.Post ))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-control form-group form-inline" style="height:50px">
+                    @Html.DropDownList("Semtara", null, "Semtinizi Seçiniz ", new {@class="form-control", @style = "font-family:Tahoma;" })
+                    <input type="text" name="searchstring" class="form-control"  autocomplete="off" style="height:26px;font-family:Tahoma;" />
+                    <input type="submit" value="Ara" class="btn btn-default" style="line-height:13px;height:26px;">
+
+                    @Html.ValidationSummary()
+                </div>
+            }
+            @using (Html.BeginForm("SearchRest", "Home", FormMethod.Post))
+            {
+                if (Model == null)
+                {
+                }
+                else
+                {
+
+                    <table class="table" style="border-radius:10px;color:#fff; background-color:rgba(0,0,0,0.6) ;">
+                        <tr>
+                            <th>
+                                <center>  <p> Restoran Adı </p> </center>
+                            </th>
+                            <th>
+                                <center>  <p> Durum </p> </center>
+                            </th>
+                            <th>
+                                <center>  <p> Ortalama Sipariş Süresi </p> </center>
+                            </th>
+                            <th>
+                                <center>  <p> Rezervasyon Ücreti </p> </center>
+                            </th>
+                            <th>
+                                <center>  <p> Nerden İstersin? </p> </center>
+                            </th>
+                            <th></th>
+                        </tr>
+                        @if (Request.HttpMethod == "POST")
+                        {
+                            foreach (var item in Model.IERestoran)
+                            {
+                                <tr>
+                                    <td>
+                                        <center> @Html.DisplayFor(modelItem => item.RestoranAdi) </center>
+                                    </td>
+                                    <td>
+                                        @if (item.Durum == true)
+                                        {
+                                            <center>  Açık  </center>
+                                        }
+                                        else
+                                        {
+                                            <center>  Kapalı  </center>
+                                        }
+                                    </td>
+                                    <td>
+                                        <center>  @Html.DisplayFor(modelItem => item.OrtSipSure) Dakika </center>
+                                    </td>
+                                    <td>
+                                        <center>   @Html.DisplayFor(modelItem => item.RezervasyonUcreti) </center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                if (item.Durum == true)
+                                                {
+                                                    @*<a href="~/Home/SearchRest/?id=@item.RestoranId">
+                                                            <input type="button" class="btn btn-success" style="margin-left:25px;height:26px;line-height:13px;" value="Buradan" />
+                                                        </a>*@
+
+                                                    <div>
+                                                        @Html.ActionLink("Buradan", "SelectProduct", new { restoranid = item.RestoranId }, new { @style = "margin-left:25px;height:26px;line-height:13px;", @class = "btn btn-success" })
+                                                    </div>
+                                                }
+                                                else
+                                                {
+
+                                                    <input type="submit" disabled="disabled" class="btn btn-danger" style="margin-left:25px;height:26px;line-height:13px;" onclick="myFunction()" value="Buradan" />
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p> Sipariş vermek için giriş yapınız. </p>
+                                            }
+                                        </center>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                }
+
+            }
+            @*<button class="glyphicon glyphicon-search button-style2"> </button>*@
+        </div>
+    </center>
+
+
+
+
+
+
+
+    @*<script>
+            function myFunction() {
+                alert(localStorage.setItem(IDButton, $('#IDButton').val()))
+            }
+        </script>*@
+
+
+
+    <script src="../Scripts/jquery-2.1.3.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+
+
+
+</body>
+</html>

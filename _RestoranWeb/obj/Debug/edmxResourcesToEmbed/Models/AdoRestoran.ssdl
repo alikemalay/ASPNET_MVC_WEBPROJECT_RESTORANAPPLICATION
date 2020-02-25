@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestoranOtomasyonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Adres">
+    <Key>
+      <PropertyRef Name="AdresId" />
+    </Key>
+    <Property Name="AdresId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sehir" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemtId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Surname" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Restoran">
+    <Key>
+      <PropertyRef Name="RestoranId" />
+    </Key>
+    <Property Name="RestoranId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RestoranAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Durum" Type="bit" Nullable="false" />
+    <Property Name="OrtSipSure" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RezervasyonUcreti" Type="money" Nullable="false" />
+    <Property Name="EklenmeTarihi" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RestoranSemt">
+    <Key>
+      <PropertyRef Name="RestoranId" />
+      <PropertyRef Name="SemtId" />
+    </Key>
+    <Property Name="RestoranId" Type="int" Nullable="false" />
+    <Property Name="SemtId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RestoranUrun">
+    <Key>
+      <PropertyRef Name="RestoranID" />
+      <PropertyRef Name="UrunID" />
+    </Key>
+    <Property Name="RestoranID" Type="int" Nullable="false" />
+    <Property Name="UrunID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Semt">
+    <Key>
+      <PropertyRef Name="SemtId" />
+    </Key>
+    <Property Name="SemtId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SemtAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Siparis">
+    <Key>
+      <PropertyRef Name="SiparisId" />
+    </Key>
+    <Property Name="SiparisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiparisTarih" Type="datetime" Nullable="false" />
+    <Property Name="AdresId" Type="int" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RestoranId" Type="int" Nullable="false" />
+    <Property Name="UrunId" Type="int" Nullable="false" />
+    <Property Name="UrunMiktari" Type="int" />
+  </EntityType>
+  <EntityType Name="SiparisDetay">
+    <Key>
+      <PropertyRef Name="SiparisDetayId" />
+    </Key>
+    <Property Name="SiparisDetayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrunMiktari" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SiparisId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Urun">
+    <Key>
+      <PropertyRef Name="UrunId" />
+    </Key>
+    <Property Name="UrunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrunAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UrunResim" Type="nvarchar(max)" />
+    <Property Name="UrunFiyati" Type="money" />
+  </EntityType>
+  <Association Name="FK_Adres_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Adres">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Adres_Semt">
+    <End Role="Semt" Type="Self.Semt" Multiplicity="1" />
+    <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semt">
+        <PropertyRef Name="SemtId" />
+      </Principal>
+      <Dependent Role="Adres">
+        <PropertyRef Name="SemtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestoranSemt_Restoran">
+    <End Role="Restoran" Type="Self.Restoran" Multiplicity="1" />
+    <End Role="RestoranSemt" Type="Self.RestoranSemt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restoran">
+        <PropertyRef Name="RestoranId" />
+      </Principal>
+      <Dependent Role="RestoranSemt">
+        <PropertyRef Name="RestoranId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestoranSemt_Semt">
+    <End Role="Semt" Type="Self.Semt" Multiplicity="1" />
+    <End Role="RestoranSemt" Type="Self.RestoranSemt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semt">
+        <PropertyRef Name="SemtId" />
+      </Principal>
+      <Dependent Role="RestoranSemt">
+        <PropertyRef Name="SemtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestoranUrun_Restoran">
+    <End Role="Restoran" Type="Self.Restoran" Multiplicity="1" />
+    <End Role="RestoranUrun" Type="Self.RestoranUrun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restoran">
+        <PropertyRef Name="RestoranId" />
+      </Principal>
+      <Dependent Role="RestoranUrun">
+        <PropertyRef Name="RestoranID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestoranUrun_Urun">
+    <End Role="Urun" Type="Self.Urun" Multiplicity="1" />
+    <End Role="RestoranUrun" Type="Self.RestoranUrun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urun">
+        <PropertyRef Name="UrunId" />
+      </Principal>
+      <Dependent Role="RestoranUrun">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparis_Adres">
+    <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adres">
+        <PropertyRef Name="AdresId" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="AdresId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparis_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparis_Restoran">
+    <End Role="Restoran" Type="Self.Restoran" Multiplicity="1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restoran">
+        <PropertyRef Name="RestoranId" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="RestoranId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparis_Urun">
+    <End Role="Urun" Type="Self.Urun" Multiplicity="1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urun">
+        <PropertyRef Name="UrunId" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="UrunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiparisDetay_Siparis">
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="1" />
+    <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Siparis">
+        <PropertyRef Name="SiparisId" />
+      </Principal>
+      <Dependent Role="SiparisDetay">
+        <PropertyRef Name="SiparisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RestoranOtomasyonModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Restoran" EntityType="Self.Restoran" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RestoranSemt" EntityType="Self.RestoranSemt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RestoranUrun" EntityType="Self.RestoranUrun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Semt" EntityType="Self.Semt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Siparis" EntityType="Self.Siparis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SiparisDetay" EntityType="Self.SiparisDetay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Adres_AspNetUsers" Association="Self.FK_Adres_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Adres" EntitySet="Adres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Adres_Semt" Association="Self.FK_Adres_Semt">
+      <End Role="Semt" EntitySet="Semt" />
+      <End Role="Adres" EntitySet="Adres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestoranSemt_Restoran" Association="Self.FK_RestoranSemt_Restoran">
+      <End Role="Restoran" EntitySet="Restoran" />
+      <End Role="RestoranSemt" EntitySet="RestoranSemt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestoranSemt_Semt" Association="Self.FK_RestoranSemt_Semt">
+      <End Role="Semt" EntitySet="Semt" />
+      <End Role="RestoranSemt" EntitySet="RestoranSemt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestoranUrun_Restoran" Association="Self.FK_RestoranUrun_Restoran">
+      <End Role="Restoran" EntitySet="Restoran" />
+      <End Role="RestoranUrun" EntitySet="RestoranUrun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestoranUrun_Urun" Association="Self.FK_RestoranUrun_Urun">
+      <End Role="Urun" EntitySet="Urun" />
+      <End Role="RestoranUrun" EntitySet="RestoranUrun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparis_Adres" Association="Self.FK_Siparis_Adres">
+      <End Role="Adres" EntitySet="Adres" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparis_AspNetUsers" Association="Self.FK_Siparis_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparis_Restoran" Association="Self.FK_Siparis_Restoran">
+      <End Role="Restoran" EntitySet="Restoran" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparis_Urun" Association="Self.FK_Siparis_Urun">
+      <End Role="Urun" EntitySet="Urun" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiparisDetay_Siparis" Association="Self.FK_SiparisDetay_Siparis">
+      <End Role="Siparis" EntitySet="Siparis" />
+      <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
